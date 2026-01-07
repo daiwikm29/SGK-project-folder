@@ -3,17 +3,15 @@ import time
 s = 1000
 m = 10000
 l = 50000
-
+ub = 100000
 
 
 def listGen(size):
     nums = []
     for i in range(size):
         nums.append(random.randint(0, 100))
-    return nums
+    return sorted(nums)
 
-def logListGen(size):
-    return(sorted(listGen(size)))
 
 
 
@@ -40,17 +38,19 @@ def logarithm(nums):
     right = len(nums)-1
     
     while left <= right:
-        middle = (left + right)/2
-        if nums[middle] == target:  targetBool = True
+        middle = (left + right)//2
+        if nums[middle] == target:  break
         elif target < nums[middle]: right = middle-1
         else:   left = middle+1 
         
     end = time.perf_counter()
     return end-start
+    
 
 sList = listGen(s)
 mList = listGen(m)
 lList = listGen(l)
+ubList = listGen(ub)
 
 print("Times for Small List Size of 1000")
 print("Linear: "+str(linear(sList)))
@@ -70,3 +70,9 @@ print("Times for Large List Size of 50,000")
 print("Linear: "+str(linear(lList)))
 print("Quadratic: "+str(quadratic(lList)))
 print("Logarithmic: "+str(logarithm(lList)))
+print()
+
+print("Times for Ultra BIG List Size of 100,000")
+print("Linear: "+str(linear(ubList)))
+print("Quadratic: "+str(quadratic(ubList)))
+print("Logarithmic: "+str(logarithm(ubList)))
